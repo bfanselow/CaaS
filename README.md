@@ -88,3 +88,10 @@ Default bind socket is **127.0.0.1:8080**
  (venv) $ curl -H "Content-Type: application/json" -d '{"problem": "((4+3)-5)^5"}' localhost:8080/calc
  {"problem": "((4+3)-5)^5", "answer": 32.0}
 ```
+
+#### How complex can we get?:
+```
+ (venv) $ curl -H "Content-Type: application/json" -d '{"problem": "3*((((4+3)-5)^5)/8)"}' localhost:8080/calc
+ {"problem": "(((4+3)-5)^5)/8", "answer": 4.0}
+```
+
