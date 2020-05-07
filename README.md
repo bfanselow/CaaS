@@ -2,7 +2,7 @@
 ## Simple Calculator-As-A-Service with Falcon
 
 ---
-### API resource syntax: /calc/\<problem\>
+### API resource syntax: /calc/\<problem\>   
 **Examples:**
 ```
   /calc/2+3
@@ -24,7 +24,7 @@
   + tan(N)
 
 ### Combinations
-Use parens to group multiple operations according to standard mathematical grouping rules:
+Use parens to group multiple operations according to standard mathematical grouping rules:   
 **Examples:**
 ```
  Problem: (sin(45)*(2^5))/(10-8)^2 
