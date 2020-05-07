@@ -2,7 +2,7 @@
 ## Simple Calculator-As-A-Service with Falcon
 
 ---
-### API resource syntax: /calc/<problem>
+### API resource syntax: /calc/\<problem\>
 **Examples:**
 ```
   /calc/2+3
