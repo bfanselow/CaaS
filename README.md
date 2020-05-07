@@ -1,15 +1,16 @@
 # CaaS
-### Simple Calculator-As-A-Service with Falcon
+## Simple Calculator-As-A-Service with Falcon
 
-## Types of problems, map to API resources:
+---
+### API resource syntax: /calc/<problem>
+**Examples:**
 ```
-  /calc/<problem>
-  Examples:
   /calc/2+3
-  /cacl/sin(30)?units=(rad|deg)
+  /calc/(2+3)*4
+  /cacl/sin(30)?units=rad
 ```
 ---
-## There a 9 different caculator problem types:
+### There a 9 different caculator problem types:
   + addition: 1+2
   + subtraction: 3-2
   + multiplication: 4*5
@@ -22,9 +23,9 @@
   + cos(N)
   + tan(N)
 
-## Combinations
+### Combinations
 Use parens to group multiple operations according to standard mathematical grouping rules:
-Examples
+**Examples:**
 ```
  Problem: (sin(45)*(2^5))/(10-8)^2 
  Answer:  (.5)*(32)/4  =  16/4  =  4
@@ -40,7 +41,8 @@ Examples
 ```
 
 ---
-### Run the service (default bind is 127.0.0.1:8080)
+### Run the service 
+Default bind socket is **127.0.0.1:8080**
 ```
  (venv) $ gunicorn app:api [-b <ip>:<port>]
 ```
@@ -51,19 +53,20 @@ Examples
 
 
 ---
-### Examples
-Simple addition:
+### Examples API calls
+#### Simple addition:
 ```
-curl http://127.0.0.1:8080//calc/simple/(2+3)
+curl http://127.0.0.1:8080//calc/(2+3)
 {"problem":"(2+3)", "answer":5}
 ```
-Complex associative problem:
+#### Complex associative problem 
+Note the the last forward slash is part of the "problem" statement as a division operator.
 ```
-curl http://127.0.0.1:8080//calc/simple/((2+4)/(9-6))+4
+curl http://127.0.0.1:8080//calc/((2+4)/(9-6))+4
 {"problem":"((2+3)/(9-7))+4", "answer":7}
 ```
-Simple powers:
+#### Simple powers:
 ```
-curl http://127.0.0.1:8080//calc/simple/2^5
+curl http://127.0.0.1:8080//calc/2^5
 {"problem":"2^5", "answer":32}
 ```
