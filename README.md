@@ -16,14 +16,14 @@
  -H "Content-Type: application/json" -d '{"problem": "\<problem-expression\>"}' localhost:8080/calc
 ```
 ---
-### There a 9 different caculator *operations*:
+### There are 6 different caculator *operations*:
   + addition: 1+2
   + subtraction: 3-2
   + multiplication: 4*5
   + division: 6/2
   + powers: 2^5
 
-  NOT YET IMPLEMENTED
+  **NOT YET IMPLEMENTED**
   + roots: (can use inverse power syntax or **root\<x\>(y)** to specify the x root of y) 
     - square-root root2(9) = 3 = 9^(1/2)
     - cube-root root3(27) = 3 = 27^(1/3)
