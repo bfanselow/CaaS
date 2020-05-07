@@ -1,35 +1,39 @@
 # CaaS
-## Simple Calculator-As-A-Service with Falcon
+## Simple Calculator-As-A-Service created for the purpose of exploring the *Falcon* API framework
 
 ---
-### API resource syntax: /calc/\<problem\>   
-**Examples:**
+### GET request syntax: /calc/\<constant\>   
 ```
-  /calc/2+3
-  /calc/(2+3)*4
-  /cacl/sin(30)?units=rad
+  /calc/pi
+  /calc/tay
+  /calc/e
+```
+
+### POST request syntax: 
+```
+ -H "Content-Type: application/json" -d '{"problem": "\<problem-expression\>"}' localhost:8080/calc
 ```
 ---
-### There a 9 different caculator problem types:
+### There a 9 different caculator *operations*:
   + addition: 1+2
   + subtraction: 3-2
   + multiplication: 4*5
   + division: 6/2
   + powers: 2^5
+
+  NOT YET IMPLEMENTED
   + roots: (can use inverse power syntax or **root\<x\>(y)** to specify the x root of y) 
     - square-root root2(9) = 3 = 9^(1/2)
     - cube-root root3(27) = 3 = 27^(1/3)
-  + sin(N) (defaults to units of degrees. Add query string "?units=rad" for radians
-  + cos(N)
-  + tan(N)
 
-### Combinations
+### Operator Combinations
 Use parens to group multiple operations according to standard mathematical grouping rules:   
 **Examples:**
 ```
- Problem: (sin(45)*(2^5))/(10-8)^2 
+ Problem: ((1/2)*(2^5))/(10-8)^2 
  Answer:  (.5)*(32)/4  =  16/4  =  4
 ```
+
 ---
 ### Setup
 ```
@@ -51,22 +55,34 @@ Default bind socket is **127.0.0.1:8080**
 ### Testing (pytest)
 
 
-
 ---
 ### Examples API calls
-#### Simple addition:
+#### Infomational *index* call:
 ```
-curl http://127.0.0.1:8080//calc/(2+3)
-{"problem":"(2+3)", "answer":5}
+ (venv) $ curl localhost:8080/calc/
+ {"type": "info", "message": "GET a math constant (pi,tau,e) as a resource, or POST a math problem in json format - example: {'problem': '(3*3)+2'}"}
 ```
-#### Complex associative problem 
-Note the the last forward slash is part of the "problem" statement as a division operator.
+ 
+#### GET constant value:
 ```
-curl http://127.0.0.1:8080//calc/((2+4)/(9-6))+4
-{"problem":"((2+3)/(9-7))+4", "answer":7}
+ (venv) $ curl localhost:8080/calc/pi
+ {"constant": "pi", "value": 3.141592653589793}
 ```
-#### Simple powers:
+
+#### POST invalid expression:
 ```
-curl http://127.0.0.1:8080//calc/2^5
-{"problem":"2^5", "answer":32}
+ (venv) $ curl -H "Content-Type: application/json" -d '{"problem": "bogus"}' localhost:8080/calc
+ {"type": "error", "message": "Request error: Invalid character in expression: [b]"}
+```
+
+#### POST simple expression:
+```
+ (venv) $ curl -H "Content-Type: application/json" -d '{"problem": "2+3"}' localhost:8080/calc
+ {"problem": "2+3", "answer": 5.0}
+```
+
+#### POST complex expression:
+```
+ (venv) $ curl -H "Content-Type: application/json" -d '{"problem": "((4+3)-5)^5"}' localhost:8080/calc
+ {"problem": "((4+3)-5)^5", "answer": 32.0}
 ```
