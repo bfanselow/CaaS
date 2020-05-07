@@ -3,7 +3,8 @@
 ### Quick-n-dirty calculator service created for the purpose of exploring the *Falcon* API framework
 
 ---
-### GET request syntax: /calc/\<constant\>   
+### GET request syntax: 
+/calc/\<constant\>   
 ```
   /calc/pi
   /calc/tay
