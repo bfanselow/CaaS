@@ -1,5 +1,6 @@
 # CaaS
-## Simple Calculator-As-A-Service created for the purpose of exploring the *Falcon* API framework
+## Calculator-As-A-Service.
+### Quick-n-dirty calculator service created for the purpose of exploring the *Falcon* API framework
 
 ---
 ### GET request syntax: /calc/\<constant\>   
