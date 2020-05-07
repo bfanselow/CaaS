@@ -16,7 +16,7 @@
   + multiplication: 4*5
   + division: 6/2
   + powers: 2^5
-  + roots: (can use inverse power syntax or **root<x>(y)** to specify the x root of y) 
+  + roots: (can use inverse power syntax or **root\<x\>(y)** to specify the x root of y) 
     - square-root root2(9) = 3 = 9^(1/2)
     - cube-root root3(27) = 3 = 27^(1/3)
   + sin(N) (defaults to units of degrees. Add query string "?units=rad" for radians
