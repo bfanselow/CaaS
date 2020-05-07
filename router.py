@@ -21,7 +21,7 @@ class InvalidRequestFormat(Exception):
 ##----------------------------------------------------------------------------
 def max_body(max_bytes):
   """
-
+   Defines a @falcon.before() decorator to limit max-size of body before processing request
   """
   def hook(req, resp, resource, params):
     length = req.content_length
