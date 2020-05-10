@@ -1,6 +1,10 @@
 # CaaS
 ## Calculator-As-A-Service.
-### Quick-n-dirty calculator service created for the purpose of exploring the *Falcon* API framework
+#### Quick-n-dirty calculator service created for the purpose of exploring the *Falcon* API framework
+
+### Requires:
+* python 3.6+
+* pip install -r requirements.txt
 
 ---
 ### GET request syntax: 
@@ -95,3 +99,13 @@ Default bind socket is **127.0.0.1:8080**
  {"problem": "(((4+3)-5)^5)/8", "answer": 4.0}
 ```
 
+### Testing
+**Unit-Testing**
+``` 
+$ python -m pytest -v tests/unit/test_compute.py
+$ python -m pytest -v tests/unit/test_compute_exc.py
+``` 
+**Integration-Testing**
+``` 
+$ python -m pytest -v tests/integration/test_service.py
+``` 

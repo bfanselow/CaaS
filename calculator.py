@@ -69,8 +69,7 @@ class Calculator(object):
             try:
                 if tokens[-1] in symbols:
                     tokens.append(char) ## start a new num
-                #elif type(tokens[-1]) is list:
-                elif isinstance(tokens[-1], 'list'):
+                elif type(tokens[-1]) is list:
                     raise CalculatorError("Invalid Expression - parens cannot be followed by numbers")
                     ## 5(3-2) must be written as 5*(3-2) 
                 else:
