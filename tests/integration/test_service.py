@@ -1,33 +1,79 @@
 """
- File: test_compute.py
- Description: pytest tests on the calaculate.py module 
+ File: test_service.py
+ Description: pytest tests on the Falcon service 
 
- 
+ We are NOT going to exhaustively test the Calculator.compute() method
+ as this is done in the unit-testing suite.
+ Here, we are only concerned with testing the functionality of the Falcon service end-to-end.
  
 """
 import pytest
 import math
+import json
+from falcon import testing
+
 from calculator import Calculator  
 
+import app
 
-## complex problem and answer
-complx = '(((10.2*3)/(3+4))) + 66/(7*%s)' % math.pi
-answer = 7.3726360697328825
+headers = {"Content-Type": "application/json"}
+##---------------------------------------------------------------------
+@pytest.fixture()
+    """
+     Create the Falcon testClient() fixure. This will be used to send requests. 
+    """
+def client():
+    return testing.TestClient(app.api)
 
-## list of (problem, answer) tuples to be used in parameterization input
-PARAM_TUPS =  [ 
- ('2+2', 4.0),          ## simple add
- ('(10-4)', 6.0),       ## simple subtract 
- ('22.6*2', 45.2),      ## simple mult 
- ('5/2', 2.5),          ## simple division 
- (complx, answer)       ## complicated 
-]
+## GET requests
+def test_get_pi(client):
+    """
+     Check for expected json response
+    """
+    exp_resp = {'constant': 'pi', 'value': math.pi}
+    req = '/calc/pi'
+    result = client.simulate_get(req)
+    assert result.json == exp_resp 
 
-##------------------------------------------------------------------------
-@pytest.mark.parametrize("input_problem, exp_answer", PARAM_TUPS)
-def test_compute(input_problem, exp_answer):
-    """ 
-    """ 
-    calc = Calculator({})
-    answer = calc.compute(input_problem)
-    assert (answer == exp_answer) 
+def test_get_tau(client):
+    """
+     Check for expected json response
+    """
+    exp_resp = {'constant': 'tau', 'value': math.tau}
+    req = '/calc/tau'
+    result = client.simulate_get(req)
+    assert result.json == exp_resp 
+
+## POST requests
+def test_post_bad_route(client):
+    """
+     Check for status='404 Not Found' 
+    """
+    bad_path = '/calculus'
+    exp_status = '404 Not Found' 
+    result = client.simulate_post(path=bad_path, headers=headers)
+    assert result.status == exp_status
+
+def test_post_bad_payload(client):
+    """
+     Check for status='400 Bad Request' 
+    """
+    path = '/calc'
+    exp_status = '400 Bad Request' 
+    prob = '2+3'
+    d_post = {'prob': prob}
+    result = client.simulate_post(path=path, headers=headers, json=d_post)
+    assert result.status == exp_status
+
+def test_post_good(client):
+    """
+     Check for expected json response
+    """
+    path = '/calc'
+    prob = '2+3'
+    exp_resp = {'problem': prob, 'answer': 5.0}
+    d_post = {'problem': prob}
+    result = client.simulate_post(path=path, headers=headers, json=d_post)
+    assert result.json == exp_resp 
+
+
