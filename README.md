@@ -104,6 +104,8 @@ Default bind socket is **127.0.0.1:8080**
 ``` 
 $ python -m pytest -v tests/unit/test_compute.py
 $ python -m pytest -v tests/unit/test_compute_exc.py
+  OR simply
+$ python -m pytest -v tests/unit/
 ``` 
 **Integration-Testing**
 ``` 
