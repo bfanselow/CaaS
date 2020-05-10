@@ -1,8 +1,6 @@
 """
  File: test_compute.py
  Description: pytest tests on the calaculate.py module 
-
- 
  
 """
 import pytest
@@ -27,6 +25,7 @@ PARAM_TUPS =  [
 @pytest.mark.parametrize("input_problem, exp_answer", PARAM_TUPS)
 def test_compute(input_problem, exp_answer):
     """ 
+      Test computuation of various math operations from parameterized input
     """ 
     calc = Calculator({})
     answer = calc.compute(input_problem)
