@@ -44,22 +44,35 @@ Use parens to group multiple operations according to standard mathematical group
 ### Setup
 ```
  $ git clone https://github.com/bfanselow/CaaS.git
- $ cd pGaaS/
  $ virtualenv -p python3 venv
- $ source venv/bin/activate
+ $ . venv/bin/activate
  (venv) $ pip install -r requirements.txt
 ```
 
 ---
-### Run the service 
-Default bind socket is **127.0.0.1:8080**
+### Run the service with simple_server (binds to **0.0.0.0:8080**)
 ```
- (venv) $ gunicorn app:api [-b <ip>:<port>]
+ (venv) cd app/
+ (venv) $ python caas.py 
+```
+
+### Run with gunicorn (binds to **0.0.0.0:8080**)
+```
+ (venv) $ ./gunicorn_start.sh
+  OR
+ (venv) $ cd app 
+ (venv) $ gunicorn caas:api [-b <ip>:<port>]
+```
+
+### Run in Docker container (binds to **0.0.0.0:8080**)
+```
+ $ docker build . -t docker-caas
+ $ docker run --name caas -d -p 8080:8080 docker-caas
 ```
 
 ---
 ### Testing (pytest)
-
+TODO
 
 ---
 ### Examples API calls
