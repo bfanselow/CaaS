@@ -11,7 +11,7 @@
 /calc/\<constant\>   
 ```
   /calc/pi
-  /calc/tay
+  /calc/tau
   /calc/e
 ```
 
